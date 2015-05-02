@@ -1,11 +1,36 @@
 <html>
   <head>
     <title>Backbone Dashboard</title>
-
+    <%= erb :head %>
   </head>
 
   <body>
-    <%= yield %>
+
+
+  <!-- Static navbar -->
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <img class="logo-image" src="style/general-assembly-logo.png" alt="General Assembly"><a class="navbar-brand" href="#">Chicago Library</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#about">Sign In</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+
+  <%= yield %>
+
   </body>
 
 </html>

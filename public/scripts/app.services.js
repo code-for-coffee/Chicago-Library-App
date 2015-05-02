@@ -29,4 +29,11 @@ app.services.render = function(template, data) {
     }
 
 };
-
+app.services.hider = function(jQuerySelector) {
+    if (jQuerySelector) $(jQuerySelector.slideUp())
+    return this;
+};
+app.services.shower = function(jQuerySelector) {
+    if (jQuerySelector) $(jQuerySelector.slideDown())
+    return this;
+};

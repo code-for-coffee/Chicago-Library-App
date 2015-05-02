@@ -3,7 +3,9 @@
   <div class="jumbotron">
     <hgroup>
     <h1>Welcome to the GA Chicago Library!</h1>
-    <h2>Please log-in using Github</h2>
+    <h2>Please log-in with Github to continue</h2>
+
+    <button class="btn btn-primary" id="login-button">Log In!</button>
   </hgroup>
 
     <section id="authentication"></section>
@@ -14,3 +16,12 @@
   </div>
 
 </div> <!-- /container -->
+
+<script type="text/javascript">
+  $(document).ready(function() {
+     $('#login-button').on("click", function() {
+         a
+         app.workspace.session = new app.services.githubSessionProvider();
+     });
+  });
+</script>

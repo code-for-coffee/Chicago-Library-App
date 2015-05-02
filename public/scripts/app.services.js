@@ -7,6 +7,15 @@ app.workspace = app.workspace || {};
 
 app.services.fb = new Firebase("https://dazzling-heat-4419.firebaseio.com");
 
+app.services.githubSessionProvider = function() {
+    app.services.fb.authWithOAuthPopup("github", function(error, authData) {
+        if (error) {
+            console.log("Login Failed!", error);
+        } else {
+            console.log("Authenticated successfully with payload:", authData);
+        }
+    });
+};
 /**
  * app.services.render
  * @param template
@@ -20,3 +29,4 @@ app.services.render = function(template, data) {
     }
 
 };
+

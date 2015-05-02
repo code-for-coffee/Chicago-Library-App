@@ -7,21 +7,31 @@ app.workspace = app.workspace || {};
 
 app.models.BaseModel = Backbone.Model.extend({
     initialize: function(hook) {
-     if (hook) {
-         hook();
-     }
+        if (typeof hook == "function") {
+            hook();
+        }
+    },
+});
+
+app.models.BooksModel = app.models.BaseModel.extend({
+    defaults: {
+        title: undefined,
+        author: undefined,
+        isCheckedOut: false
     }
 });
 
 app.models.BaseCollection = Backbone.Collection.extend({
     initialize: function(hook) {
-        if (hook) {
+        if (typeof hook == "function") {
             hook();
         }
-    }
+    },
+    url: 'https://dazzling-heat-4419.firebaseio.com/books',
+    model: app.models.BooksModel
 });
 
-app.models.BooksModel = app.models.BaseModel.extend();
+
 app.models.UsersModel = app.models.BaseModel.extend();
 app.models.BooksCollection = app.models.BaseCollection.extend();
 app.models.UsersCollection = app.models.BaseCollection.extend();

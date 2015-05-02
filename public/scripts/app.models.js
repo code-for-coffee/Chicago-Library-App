@@ -21,7 +21,7 @@ app.models.BooksModel = app.models.BaseModel.extend({
     }
 });
 
-app.models.BaseCollection = Backbone.Collection.extend({
+app.models.BaseCollection = Backbone.Firebase.Collection.extend({
     initialize: function(hook) {
         if (typeof hook == "function") {
             hook();

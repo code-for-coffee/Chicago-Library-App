@@ -5,7 +5,11 @@ app.views = app.views || {};
 app.services = app.services || {};
 app.workspace = app.workspace || {};
 
-app.services.fb = new Firebase("https://dazzling-heat-4419.firebaseio.com");
+app.services.settings = {
+    firebase: "https://dazzling-heat-4419.firebaseio.com", // replace with your own
+};
+
+app.services.fb = new Firebase(app.services.settings.firebase);
 
 app.services.githubSessionProvider = function() {
     app.services.fb.authWithOAuthPopup("github", function(error, authData) {

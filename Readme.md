@@ -8,6 +8,8 @@ Boostrap + Sinatra + jQuery + Underscore + Backbone + Handlebars + Firebase + He
 ### Notes
 
 - This is a work in progress.
+- Please see issues.
+- Yep, it isn't finished. Sorry!
 
 To get started, run:
 ```bash

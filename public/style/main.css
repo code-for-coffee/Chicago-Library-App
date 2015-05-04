@@ -3,3 +3,10 @@
     width: 17%;
     float: left;
 }
+a, a:hover, a:visited, a:active {
+    color: #d9534f;
+}
+
+.space {
+    margin-top: 1rem;
+}

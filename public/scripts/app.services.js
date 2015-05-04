@@ -18,12 +18,22 @@ app.services.githubSessionProvider = function() {
             app.workspace.github = authData;
             //console.log("Login Failed!", error);
         } else {
+            app.workspace.userActivityList = new app.models.UsersActivityCollection();
+            //console.log("Authenticated successfully with payload:", authData);
             app.workspace.github = authData;
             var authHider = new app.services.hider($('#app-auth-form'));
-
             var userInfoShower = new app.services.shower($('#app-user-info'));
             var libraryShower = new app.services.shower($('#app-library'));
-            //console.log("Authenticated successfully with payload:", authData);
+            app.workspace.currentUserModel = new app.models.UserModel({
+                uid: app.workspace.github.uid,
+                id: app.workspace.github.github.id,
+                name: app.workspace.github.github.displayName,
+                username: app.workspace.github.github.username,
+                email: app.workspace.github.github.email,
+                lastActive: (new Date()).toString()
+            });
+            app.workspace.userActivityList.create(app.workspace.currentUserModel);
+
         }
     });
 };
@@ -58,8 +68,4 @@ app.services.displayError = function() {
 };
 app.services.hideError = function() {
     var hider = new app.services.hider($("#app-state-error"));
-};
-
-app.services.displayUserInfo = function() {
-
 };

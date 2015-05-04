@@ -53,4 +53,6 @@ app.views.BooksListView = app.views.BaseView.extend({
         return this;
     }
 });
-app.views.UsersView = app.views.BaseView.extend();
+app.views.UsersView = app.views.BaseView.extend({
+
+});

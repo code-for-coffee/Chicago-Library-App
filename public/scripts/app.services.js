@@ -6,7 +6,7 @@ app.services = app.services || {};
 app.workspace = app.workspace || {};
 
 app.services.settings = {
-    firebase: "https://dazzling-heat-4419.firebaseio.com", // replace with your own
+    firebase: "https://dazzling-heat-4419.firebaseio.com" // replace with your own
 };
 
 app.services.fb = new Firebase(app.services.settings.firebase);
@@ -33,7 +33,9 @@ app.services.githubSessionProvider = function() {
                 lastActive: (new Date()).toString()
             });
             app.workspace.userActivityList.create(app.workspace.currentUserModel);
-
+            app.workspace.currentUserView = new app.views.UserView({
+                model: app.workspace.currentUserModel
+            });
         }
     });
 };
@@ -45,7 +47,10 @@ app.services.githubSessionProvider = function() {
  */
 app.services.render = function(template, data) {
 
+    console.log(template);
+    console.log(data);
     if (template && data) {
+        console.log(template(data))
         return template(data);
     }
 

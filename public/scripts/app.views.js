@@ -12,6 +12,7 @@ app.views.BaseView = Backbone.View.extend({
             base.listenTo(base.model, "change", base.render);
             base.listenTo(base.model, "sync", base.render);
         }
+        base.render();
     },
     baseClass: function() {
         return this;
@@ -20,7 +21,9 @@ app.views.BaseView = Backbone.View.extend({
     render: function() {
         var base = this.baseClass();
         if (base.template && base.model) {
-            this.$el.html(app.services.render(base.template, base.model));
+            var renderedHTML = app.services.render(base.template, base.model.attributes);
+            this.$el.html(renderedHTML);
+            $(base.parent).append(renderedHTML);
         }
         return this;
     }
@@ -53,6 +56,15 @@ app.views.BooksListView = app.views.BaseView.extend({
         return this;
     }
 });
-app.views.UsersView = app.views.BaseView.extend({
-
+app.views.UserView = app.views.BaseView.extend({
+    template: app.templates['user'],
+    render: function() {
+        var base = this.baseClass();
+        if (base.template && base.model) {
+            var renderedHTML = app.services.render(base.template, base.model.attributes);
+            this.$el.html(renderedHTML);
+            $("#app-user-info").html(this.$el);
+        }
+        return this;
+    }
 });

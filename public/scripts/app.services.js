@@ -14,9 +14,11 @@ app.services.fb = new Firebase(app.services.settings.firebase);
 app.services.githubSessionProvider = function() {
     app.services.fb.authWithOAuthPopup("github", function(error, authData) {
         if (error) {
-            console.log("Login Failed!", error);
+            app.workspace.github = authData;
+            //console.log("Login Failed!", error);
         } else {
-            console.log("Authenticated successfully with payload:", authData);
+            app.workspace.github = authData;
+            //console.log("Authenticated successfully with payload:", authData);
         }
     });
 };

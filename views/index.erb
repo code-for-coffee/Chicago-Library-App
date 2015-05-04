@@ -1,21 +1,34 @@
 <div class="container">
 
     <img  src="style/general-assembly-logo.png" alt="General Assembly">
-    <hgroup>
       <h1>Welcome to the Chicago Library!</h1>
-      <h3>Please log-in with Github to continue</h3>
-      <p>You'll be redirected to Github's servers to login and then shown the library.</p>
-
-      <button class="btn btn-danger btn-lg" id="login-button">Authenticate with Github</button>
-    </hgroup>
-
 </div> <!-- /container -->
 
-<div class="container space">
+<div class="container not-visible" id="app-state-error">
+  <div class="alert alert-danger"><h2>Danger, Will Robinson!</h2>
+    <h3>We were unable to authenticate you on Github. Try again?</h3></div>
+</div>
+
+<div class="container" id="app-auth-form">
+  <h3>Please log-in with Github to continue.</h3>
+  <p>
+    <ul>
+      <li>Once you click to login, a popup will appear to log you in using Github's secure servers.</li>
+      <li>You may check out only one book at a time.</li>
+      <li>The maxmimum length of borrowing a book is 14 days.</li>
+      <li><strong>Problems?</strong> Contact me at <a href="mailto:jamest@ga.co">jamest@ga.co</a>.</li>
+    </ul></p>
+
+  <h2>Let's Get Started!</h2>
+
+  <button class="btn btn-danger btn-lg" id="login-button">Authenticate with Github</button>
+
   <h3>Don't have a Github account?</h3>
   <a href="https://github.com/join" target="_blank"><button class="btn btn-danger btn-lg" id="login-button">Register an account for free!</button></a>
 
-</div>
+</div> <!-- /container -->
+
+
 
 <script type="text/javascript">
   $(document).ready(function() {

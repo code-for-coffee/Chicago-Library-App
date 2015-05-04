@@ -1,0 +1,26 @@
+<div class="container">
+
+  <img  src="style/general-assembly-logo.png" alt="General Assembly">
+  <hgroup>
+    <h1>Welcome to the Chicago Library!</h1>
+    <h3>Please log-in with Github to continue</h3>
+    <p>You'll be redirected to Github's servers to login and then shown the library.</p>
+
+    <button class="btn btn-danger btn-lg" id="login-button">Authenticate with Github</button>
+  </hgroup>
+
+</div> <!-- /container -->
+
+<div class="container space">
+  <h3>Don't have a Github account?</h3>
+  <a href="https://github.com/join" target="_blank"><button class="btn btn-danger btn-lg" id="login-button">Register an account for free!</button></a>
+
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#login-button').on("click", function() {
+            app.workspace.session = new app.services.githubSessionProvider();
+        });
+    });
+</script>

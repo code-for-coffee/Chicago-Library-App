@@ -14,10 +14,15 @@ app.services.fb = new Firebase(app.services.settings.firebase);
 app.services.githubSessionProvider = function() {
     app.services.fb.authWithOAuthPopup("github", function(error, authData) {
         if (error) {
+            var errorWarning = new app.services.displayError();
             app.workspace.github = authData;
             //console.log("Login Failed!", error);
         } else {
             app.workspace.github = authData;
+            var authHider = new app.services.hider($('#app-auth-form'));
+
+            var userInfoShower = new app.services.shower($('#app-user-info'));
+            var libraryShower = new app.services.shower($('#app-library'));
             //console.log("Authenticated successfully with payload:", authData);
         }
     });
@@ -36,10 +41,25 @@ app.services.render = function(template, data) {
 
 };
 app.services.hider = function(jQuerySelector) {
-    if (jQuerySelector) $(jQuerySelector.slideUp())
+    if (jQuerySelector) $(jQuerySelector).slideUp();
     return this;
 };
 app.services.shower = function(jQuerySelector) {
-    if (jQuerySelector) $(jQuerySelector.slideDown())
+    if (jQuerySelector){
+        $(jQuerySelector).slideDown();
+    }
+
     return this;
+};
+
+
+app.services.displayError = function() {
+    var shower = new app.services.shower($("#app-state-error"));
+};
+app.services.hideError = function() {
+    var hider = new app.services.hider($("#app-state-error"));
+};
+
+app.services.displayUserInfo = function() {
+
 };

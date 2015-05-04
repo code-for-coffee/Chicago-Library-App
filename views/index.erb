@@ -1,11 +1,10 @@
 <div class="container">
-
     <img  src="style/general-assembly-logo.png" alt="General Assembly">
-      <h1>Welcome to the Chicago Library!</h1>
+    <h1>Welcome to the Chicago Library!</h1>
 </div> <!-- /container -->
 
-<div class="container not-visible" id="app-state-error">
-  <div class="alert alert-danger"><h2>Danger, Will Robinson!</h2>
+<div class="container" id="app-state-error" style="display: none;">
+    <div class="alert alert-danger"><h2>Danger, Will Robinson!</h2>
     <h3>We were unable to authenticate you on Github. Try again?</h3></div>
 </div>
 
@@ -17,23 +16,34 @@
       <li>You may check out only one book at a time.</li>
       <li>The maxmimum length of borrowing a book is 14 days.</li>
       <li><strong>Problems?</strong> Contact me at <a href="mailto:jamest@ga.co">jamest@ga.co</a>.</li>
-    </ul></p>
+    </ul>
+  </p>
 
   <h2>Let's Get Started!</h2>
-
   <button class="btn btn-danger btn-lg" id="login-button">Authenticate with Github</button>
 
   <h3>Don't have a Github account?</h3>
   <a href="https://github.com/join" target="_blank"><button class="btn btn-danger btn-lg" id="login-button">Register an account for free!</button></a>
-
 </div> <!-- /container -->
 
+<div class="container" id="app-user-info" style="display: none;">
+  <h2>User Info here!</h2>
+</div>
+
+<div class="container" id="app-library" style="display: none;">
+  <h2>Library will be rendered here!</h2>
+</div>
 
 
 <script type="text/javascript">
-  $(document).ready(function() {
-     $('#login-button').on("click", function() {
-         app.workspace.session = new app.services.githubSessionProvider();
-     });
-  });
+    $(document).ready(function() {
+        //$('#app-library').hide();
+        //$('#app-user-info').hide();
+        //$('#app-state-error').hide();
+
+
+        $('#login-button').on("click", function() {
+            app.workspace.session = new app.services.githubSessionProvider();
+        });
+    });
 </script>

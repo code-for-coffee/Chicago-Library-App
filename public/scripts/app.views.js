@@ -104,11 +104,23 @@ app.views.ReturnBookPrompt = Backbone.Model.extend({
 app.views.returnBookEventBinder = function() {
     if (!app.workspace.session.returnBookEventBound) {
         app.workspace.session.returnBookEventBound = true;
-        $('#app-return-book').click(function () {
-            // nyi
-            alert("Thanks! Your book has been checked out to you for the next 10 days. You'll be redirected to Google now.");
-            window.location = "https://google.com";
+        $(document).on('click', '#app-return-book', function() {
+            if (!app.workspace.sessionReturn) {
+                app.workspace.sessionReturn = true;
+                var bookId = $(this).data('id');
+                var newDate = new Date().toString();
+                var bookModel = app.workspace.libraryBooksCollection.where({id: bookId});
+                bookModel[0].set("isCheckedOut", false);
+                bookModel[0].set("borrowerUsername", "");
+                bookModel[0].set("borrowerUid", "");
+                bookModel[0].set("borrowerName", "");
+                bookModel[0].set("borrowerEmail", "");
+                bookModel[0].set("borrowerDate", newDate);
+                alert("Thanks! Your book has been returned.");
+                $('.dropoff-book').hide();
+            }
         });
+
     }
 };
 app.views.bookCheckoutBinder = function() {
@@ -123,14 +135,14 @@ app.views.bookCheckoutBinder = function() {
                 var bookModel = app.workspace.libraryBooksCollection.where({id: bookId});
                 var newDate = new Date().toString();
                 bookModel[0].set("isCheckedOut", true);
-                bookModel[0].set("borrowerUsername", app.workspace.username);
+                bookModel[0].set("borrowerUsername", app.workspace.github.username);
                 bookModel[0].set("borrowerUid", app.workspace.github.uid);
                 bookModel[0].set("borrowerName", app.workspace.github.displayName);
-                bookModel[0].set("borrowerEmail", app.workspace.email);
+                bookModel[0].set("borrowerEmail", app.workspace.github.email);
                 bookModel[0].set("borrowerDate", newDate);
 
-                alert("Thanks for checking out this book!");
-                //window.location = "https://google.com";
+                alert("Thanks for checking out this book! Please remember to return this book within 3 days! Thanks!");
+                window.location = "https://google.com";
             }
         });
     }

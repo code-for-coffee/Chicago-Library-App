@@ -5,10 +5,3 @@ app.templates = Handlebars.templates || {};
 app.views = app.views || {};
 app.services = app.services || {};
 app.workspace = app.workspace || {};
-
-
-$(document).ready(function(event) {
-
-
-
-});

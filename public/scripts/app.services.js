@@ -119,7 +119,7 @@ app.services.doesUserHaveBookFixture = function() {
 
     if (userHasBook) {
         app.workspace.returnBookPrompt = new app.views.ReturnBookPrompt();
-        app.workspace.returnBookPrompt.render({ title: activeBookTitle });
+        app.workspace.returnBookPrompt.render({ title: activeBookTitle, id: selectedBook.attributes.id });
     }
 
     return this;

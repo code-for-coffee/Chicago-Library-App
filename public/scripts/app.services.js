@@ -102,13 +102,13 @@ app.services.startupFixture = function(sessionObj) {
 app.services.doesUserHaveBookFixture = function() {
     if (app.workspace.libraryBooksCollection.models.length < 1) return false;
     // loop through books to see if user has checked one out or not
-    var activeUsername = app.workspace.currentUserModel.attributes.username;
+    var activeUsername = app.workspace.currentUserModel.attributes.uid;
     var userHasBook = false;
     var activeBookTitle;
     for (var book in app.workspace.libraryBooksCollection.models) {
         var selectedBook = app.workspace.libraryBooksCollection.models[book];
-        if (selectedBook.attributes.hasOwnProperty('borrowerUsername')) {
-            if (selectedBook.attributes.borrowerUsername == activeUsername) {
+        if (selectedBook.attributes.hasOwnProperty('borrowerUid')) {
+            if (selectedBook.attributes.borrowerUid == activeUsername) {
                 userHasBook = true;
                 activeBookTitle = selectedBook.attributes.title;
                 break;

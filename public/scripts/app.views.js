@@ -118,8 +118,19 @@ app.views.bookCheckoutBinder = function() {
         $(document).on('click', '.book-checkout', function() {
             if (!app.workspace.session.over) {
                 app.workspace.session.over = true;
-                alert("Thanks for checking out this book! You're being redirected to Google.");
-                window.location = "https://google.com";
+
+                var bookId = $(this).data('id');
+                var bookModel = app.workspace.libraryBooksCollection.where({id: bookId});
+                var newDate = new Date().toString();
+                bookModel[0].set("isCheckedOut", true);
+                bookModel[0].set("borrowerUsername", app.workspace.username);
+                bookModel[0].set("borrowerUid", app.workspace.github.uid);
+                bookModel[0].set("borrowerName", app.workspace.github.displayName);
+                bookModel[0].set("borrowerEmail", app.workspace.email);
+                bookModel[0].set("borrowerDate", newDate);
+
+                alert("Thanks for checking out this book!");
+                //window.location = "https://google.com";
             }
         });
     }

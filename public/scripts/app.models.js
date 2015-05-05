@@ -21,9 +21,12 @@ app.models.BooksModel = app.models.BaseModel.extend({
         borrowerUid: null,
         borrowerName: null,
         borrowerUsername: null,
-        borrowEmail: null,
-        borrowedDate: null
-    }
+        borrowerEmail: null,
+        borrowerDate: null,
+        date: null
+    },
+    url: 'https://dazzling-heat-4419.firebaseio.com/books'
+
 });
 
 app.models.UserModel = app.models.BaseModel.extend({

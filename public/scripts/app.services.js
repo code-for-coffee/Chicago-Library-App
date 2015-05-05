@@ -85,6 +85,14 @@ app.services.startupFixture = function(sessionObj) {
     app.workspace.currentUserView = new app.views.UserView({
         model: app.workspace.currentUserModel
     });
+    // get list of books
+    app.workspace.libraryBooksList = new app.models.BooksCollection();
+    app.workspace.libraryBooksList.fetch();
+    // render them
+    app.workspace.libraryBooksList = new app.views.BooksListView({
+        collection: app.workspace.libraryBooksList
+    });
+
     return this;
 
 };

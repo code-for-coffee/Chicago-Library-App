@@ -39,6 +39,7 @@ app.views.BooksListView = app.views.BaseView.extend({
             base.listenTo(base.collection, "change", base.render);
             base.listenTo(base.collection, "sync", base.render);
         }
+        this.render();
     },
     template: app.templates['table'],
     render: function() {
@@ -46,13 +47,18 @@ app.views.BooksListView = app.views.BaseView.extend({
         var models = base.collection.models;
         var booksView = app.views.BooksView;
         base.$el.html(base.template());
-        for (var inc = 0; inc < models.length; inc++) {
-            if (models[inc].hasOwnProperty(attributes)) {
-                var newBookView = booksView(models[inc].attributes);
-                newBookView.delegateEvents();
-                base.$el.append(newBookView);
-            }
+        console.log(base.$el.html());
+        for (var inc = 0; inc < models.length; inc) {
+            var selectedModel = models[inc].attributes;
+            var newBookView = new booksView(selectedModel);
+            console.log(selectedModel);
+            console.log(newBookView.$el.html());
+            newBookView.render();
+            newBookView.delegateEvents();
+            base.$el.append(newBookView.$el);
+            inc++;
         }
+        $('#app-library-list').html(base.$el);
         return this;
     }
 });

@@ -41,7 +41,6 @@ app.services.render = function(template, data) {
     //console.log(template);
     //console.log(data);
     if (template && data) {
-        console.log(template(data))
         return template(data);
     }
 
@@ -88,13 +87,42 @@ app.services.startupFixture = function(sessionObj) {
     // get list of books
     app.workspace.libraryBooksCollection = new app.models.BooksCollection();
     app.workspace.libraryBooksCollection.fetch();
-    // render them
+
+    // render book list
     app.workspace.libraryBooksView = new app.views.BooksListView({
         collection: app.workspace.libraryBooksCollection
     });
 
+    app.workspace.session.returnBookEventBound = false;
+    app.workspace.session.checkOutBookEventBound = false;
+
     return this;
 
+};
+app.services.doesUserHaveBookFixture = function() {
+    if (app.workspace.libraryBooksCollection.models.length < 1) return false;
+    // loop through books to see if user has checked one out or not
+    var activeUsername = app.workspace.currentUserModel.attributes.username;
+    var userHasBook = false;
+    var activeBookTitle;
+    for (var book in app.workspace.libraryBooksCollection.models) {
+        var selectedBook = app.workspace.libraryBooksCollection.models[book];
+        if (selectedBook.attributes.hasOwnProperty('borrowerUsername')) {
+            if (selectedBook.attributes.borrowerUsername == activeUsername) {
+                userHasBook = true;
+                activeBookTitle = selectedBook.attributes.title;
+                break;
+            }
+        }
+    }
+    console.log(activeBookTitle + ", " + activeUsername + ", " + userHasBook);
+
+    if (userHasBook) {
+        app.workspace.returnBookPrompt = new app.views.ReturnBookPrompt();
+        app.workspace.returnBookPrompt.render({ title: activeBookTitle });
+    }
+
+    return this;
 };
 /**
  * First Visit Notification

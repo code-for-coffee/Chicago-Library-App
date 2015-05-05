@@ -10,7 +10,9 @@ templates['book-table-row-available'] = template({"compiler":[6,">= 2.0.0-beta.1
     + alias3(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"title","hash":{},"data":data}) : helper)))
     + "</td>\n<td>"
     + alias3(((helper = (helper = helpers.author || (depth0 != null ? depth0.author : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"author","hash":{},"data":data}) : helper)))
-    + "</td>\n<td><button class=\"btn-lg btn-success\">Check Out</button></td>\n";
+    + "</td>\n<td><button class=\"btn-lg btn-success book-checkout\" data-id=\""
+    + alias3(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\">Check Out</button></td>\n";
 },"useData":true});
 templates['book-table-row'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
@@ -26,9 +28,9 @@ templates['book-table-row'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":
 templates['return-book'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var helper;
 
-  return "<h2>Return your book?</h2>\n<p>It looks like you have checked out "
+  return "<h2>Return your book?</h2>\n<p>It looks like you have checked out <strong>"
     + this.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"title","hash":{},"data":data}) : helper)))
-    + ". Would you like to return it?</p>\n<p><button class=\"btn-lg btn-danger\">Return Book</button></p>\n";
+    + "</strong>. Would you like to return it?</p>\n<p><button id='app-return-book' class=\"btn-lg btn-danger\">Return Book</button></p>\n";
 },"useData":true});
 templates['user'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;

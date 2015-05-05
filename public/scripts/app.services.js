@@ -24,18 +24,9 @@ app.services.githubSessionProvider = function() {
             var authHider = new app.services.hider($('#app-auth-form'));
             var userInfoShower = new app.services.shower($('#app-user-info'));
             var libraryShower = new app.services.shower($('#app-library'));
-            app.workspace.currentUserModel = new app.models.UserModel({
-                uid: app.workspace.github.uid,
-                id: app.workspace.github.github.id,
-                name: app.workspace.github.github.displayName,
-                username: app.workspace.github.github.username,
-                email: app.workspace.github.github.email,
-                lastActive: (new Date()).toString()
-            });
-            app.workspace.userActivityList.create(app.workspace.currentUserModel);
-            app.workspace.currentUserView = new app.views.UserView({
-                model: app.workspace.currentUserModel
-            });
+
+            app.services.startupFixture(app.workspace.github);
+            return true;
         }
     });
 };
@@ -55,22 +46,51 @@ app.services.render = function(template, data) {
     }
 
 };
+/**
+ * UI Helpers
+ */
 app.services.hider = function(jQuerySelector) {
     if (jQuerySelector) $(jQuerySelector).slideUp();
     return this;
 };
 app.services.shower = function(jQuerySelector) {
-    if (jQuerySelector){
-        $(jQuerySelector).slideDown();
-    }
-
+    if (jQuerySelector) $(jQuerySelector).slideDown();
     return this;
 };
-
-
 app.services.displayError = function() {
     var shower = new app.services.shower($("#app-state-error"));
+    return this;
 };
 app.services.hideError = function() {
     var hider = new app.services.hider($("#app-state-error"));
+    return this;
+};
+/**
+ * App Fixtures
+ */
+app.services.startupFixture = function(sessionObj) {
+
+    // create our user
+    app.workspace.currentUserModel = new app.models.UserModel({
+        uid: sessionObj.uid,
+        id: sessionObj.github.id,
+        name: sessionObj.github.displayName,
+        username: sessionObj.github.username,
+        email: sessionObj.github.email,
+        lastActive: (new Date()).toString()
+    });
+    // create our user activity list
+    app.workspace.userActivityList.create(app.workspace.currentUserModel);
+    // generate view
+    app.workspace.currentUserView = new app.views.UserView({
+        model: app.workspace.currentUserModel
+    });
+    return this;
+
+};
+/**
+ * First Visit Notification
+ */
+app.services.checkForInstructionsCookie = function() {
+    //nyi
 };

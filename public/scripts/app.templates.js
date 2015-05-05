@@ -22,7 +22,7 @@ templates['book-table-row'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":
     + "</td>\n<td>"
     + alias3(((helper = (helper = helpers.author || (depth0 != null ? depth0.author : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"author","hash":{},"data":data}) : helper)))
     + "</td>\n<td>"
-    + alias3(((helper = (helper = helpers.borrowerName || (depth0 != null ? depth0.borrowerName : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"borrowerName","hash":{},"data":data}) : helper)))
+    + alias3(((helper = (helper = helpers.borrowerUsername || (depth0 != null ? depth0.borrowerUsername : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"borrowerUsername","hash":{},"data":data}) : helper)))
     + "</td>\n\n";
 },"useData":true});
 templates['return-book'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {

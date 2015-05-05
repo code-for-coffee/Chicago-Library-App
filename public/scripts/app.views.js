@@ -16,23 +16,32 @@ app.views.BaseView = Backbone.View.extend({
     },
     baseClass: function() {
         return this;
-    },
-    template: undefined,
-    render: function() {
-        var base = this.baseClass();
-        if (base.template && base.model) {
-            var renderedHTML = app.services.render(base.template, base.model.attributes);
-            this.$el.html(renderedHTML);
-            $(base.parent).append(renderedHTML);
-        }
-        return this;
     }
 });
 
 app.views.BooksView = app.views.BaseView.extend({
-    template: app.templates['book-table-row']
+    tagName: "tr",
+    template: app.templates['book-table-row'],
+    render: function() {
+        var base = this.baseClass();
+        if (base.template && base.model) {
+            if (base.model.attributes.hasOwnProperty('borrowerUid')) {
+                var checkedOut = base.model.attributes.isCheckedOut;
+                if (checkedOut == false) {
+                    base.template = app.templates['book-table-row-available'];
+                }
+            }
+            var renderedHTML = app.services.render(base.template, base.model.attributes);
+            this.$el.html(renderedHTML);
+            $(base.parent).append(renderedHTML);
+        }
+        return this.$el.html();
+    }
 });
 app.views.BooksListView = app.views.BaseView.extend({
+    tagName: "table",
+    id: "library-books",
+    className: "table table-hover table-condensed",
     initialize: function() {
         var base = this.baseClass();
         if (this.collection) {
@@ -45,19 +54,12 @@ app.views.BooksListView = app.views.BaseView.extend({
     render: function() {
         var base = this.baseClass();
         var models = base.collection.models;
-        var booksView = app.views.BooksView;
-        base.$el.html(base.template());
-        console.log(base.$el.html());
-        for (var inc = 0; inc < models.length; inc) {
-            var selectedModel = models[inc].attributes;
-            var newBookView = new booksView(selectedModel);
-            console.log(selectedModel);
-            console.log(newBookView.$el.html());
-            newBookView.render();
-            newBookView.delegateEvents();
-            base.$el.append(newBookView.$el);
-            inc++;
+        base.$el.html(app.templates['book-table-head']());
+        for (var inc = 0; inc < models.length; inc++) {
+            var bookView = new app.views.BooksView({ model: models[inc] });
+            $(base.$el).append(bookView.$el);
         }
+        var shower = new app.services.shower($('#app-library-list'));
         $('#app-library-list').html(base.$el);
         return this;
     }

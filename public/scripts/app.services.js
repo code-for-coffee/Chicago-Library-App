@@ -38,8 +38,8 @@ app.services.githubSessionProvider = function() {
  */
 app.services.render = function(template, data) {
 
-    console.log(template);
-    console.log(data);
+    //console.log(template);
+    //console.log(data);
     if (template && data) {
         console.log(template(data))
         return template(data);
@@ -86,11 +86,11 @@ app.services.startupFixture = function(sessionObj) {
         model: app.workspace.currentUserModel
     });
     // get list of books
-    app.workspace.libraryBooksList = new app.models.BooksCollection();
-    app.workspace.libraryBooksList.fetch();
+    app.workspace.libraryBooksCollection = new app.models.BooksCollection();
+    app.workspace.libraryBooksCollection.fetch();
     // render them
-    app.workspace.libraryBooksList = new app.views.BooksListView({
-        collection: app.workspace.libraryBooksList
+    app.workspace.libraryBooksView = new app.views.BooksListView({
+        collection: app.workspace.libraryBooksCollection
     });
 
     return this;

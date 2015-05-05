@@ -134,11 +134,12 @@ app.views.bookCheckoutBinder = function() {
                 var bookId = $(this).data('id');
                 var bookModel = app.workspace.libraryBooksCollection.where({id: bookId});
                 var newDate = new Date().toString();
+                var username =
                 bookModel[0].set("isCheckedOut", true);
-                bookModel[0].set("borrowerUsername", app.workspace.github.username);
+                bookModel[0].set("borrowerUsername", app.workspace.github.github.username);
                 bookModel[0].set("borrowerUid", app.workspace.github.uid);
-                bookModel[0].set("borrowerName", app.workspace.github.displayName);
-                bookModel[0].set("borrowerEmail", app.workspace.github.email);
+                bookModel[0].set("borrowerName", app.workspace.github.github.displayName);
+                bookModel[0].set("borrowerEmail", app.workspace.github.github.email);
                 bookModel[0].set("borrowerDate", newDate);
 
                 alert("Thanks for checking out this book! Please remember to return this book within 3 days! Thanks!");

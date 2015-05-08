@@ -142,8 +142,9 @@ app.views.bookCheckoutBinder = function() {
                 bookModel[0].set("borrowerEmail", app.workspace.github.github.email);
                 bookModel[0].set("borrowerDate", newDate);
 
-                alert("Thanks for checking out this book! Please remember to return this book within 3 days! Thanks!");
-                window.location = "https://google.com";
+                alert("Checking your book out...");
+
+                window.location = "/confirmation";
             }
         });
     }

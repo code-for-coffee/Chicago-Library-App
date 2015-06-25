@@ -1,7 +1,7 @@
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
 templates['book-table-head'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "\n<thead><tr><th>Title</th><th>Author</th><th>Status</th></tr></thead>\n";
+    return "\n<thead><tr><th>Title</th><th>Author</th><th>Checked Out</th><th>Status</th></tr></thead>\n";
 },"useData":true});
 templates['book-table-row-available'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
@@ -10,7 +10,7 @@ templates['book-table-row-available'] = template({"compiler":[6,">= 2.0.0-beta.1
     + alias3(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"title","hash":{},"data":data}) : helper)))
     + "</td>\n<td>"
     + alias3(((helper = (helper = helpers.author || (depth0 != null ? depth0.author : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"author","hash":{},"data":data}) : helper)))
-    + "</td>\n<td><button id=\"app-book-dropoff\" class=\"btn-lg btn-success book-checkout\" data-id=\""
+    + "</td>\n<td></td>\n<td><button id=\"app-book-dropoff\" class=\"btn-lg btn-success book-checkout\" data-id=\""
     + alias3(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"id","hash":{},"data":data}) : helper)))
     + "\">Check Out</button></td>\n";
 },"useData":true});
@@ -22,8 +22,10 @@ templates['book-table-row'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":
     + "</td>\n<td>"
     + alias3(((helper = (helper = helpers.author || (depth0 != null ? depth0.author : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"author","hash":{},"data":data}) : helper)))
     + "</td>\n<td>"
+    + alias3(((helper = (helper = helpers.borrowerDate || (depth0 != null ? depth0.borrowerDate : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"borrowerDate","hash":{},"data":data}) : helper)))
+    + "</td>\n<td>"
     + alias3(((helper = (helper = helpers.borrowerUsername || (depth0 != null ? depth0.borrowerUsername : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"borrowerUsername","hash":{},"data":data}) : helper)))
-    + "</td>\n\n";
+    + "</td>\n";
 },"useData":true});
 templates['return-book'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
